@@ -166,7 +166,7 @@ public class MainView extends VBox {
         }
 
         this.applicationState = applicationState;
-        System.out.println("Application state: "+this.applicationState);
+        //System.out.println("Application state: "+this.applicationState);
     }
 
     public Soap getSoap() {
