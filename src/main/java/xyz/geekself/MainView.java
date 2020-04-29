@@ -1,11 +1,18 @@
 package xyz.geekself;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import javafx.scene.transform.NonInvertibleTransformException;
+
+import java.nio.channels.Pipe;
 
 public class MainView extends VBox {
 
@@ -15,6 +22,7 @@ public class MainView extends VBox {
     private Affine affine;  //Transform logic to pixel
 
     private Simulation simulation;
+    private int drawMode;
 
     public MainView() {
            this.stepButton = new Button("step");
@@ -24,6 +32,10 @@ public class MainView extends VBox {
            });
 
            this.canvas = new Canvas(400,400);
+           this.canvas.setOnMousePressed(this::setEventHandler);   //Draw_Press
+           this.canvas.setOnMouseDragged(this::setEventHandler);   //Draw_Drag
+
+           this.setOnKeyPressed(this::OnKeyPress);
 
            this.getChildren().addAll(this.stepButton,this.canvas);
 
@@ -32,14 +44,32 @@ public class MainView extends VBox {
 
            this.simulation = new Simulation(10,10);
 
-           simulation.setAlive(2,2);
-           simulation.setAlive(3,2);
-           simulation.setAlive(4,2);
 
-           simulation.setAlive(5,5);
-           simulation.setAlive(5,6);
-           simulation.setAlive(6,5);
-           simulation.setAlive(6,6);
+    }
+
+    private void OnKeyPress(KeyEvent keyEvent) {
+        if(keyEvent.getCode() == KeyCode.S){
+            this.drawMode = 1;
+        }else if(keyEvent.getCode() == KeyCode.E){
+            this.drawMode = 0;
+        }
+    }
+
+    private void setEventHandler(MouseEvent mouseEvent) {
+        double mouseX = mouseEvent.getX();
+        double mouseY = mouseEvent.getY();
+
+        try {
+            Point2D simCoord = this.affine.inverseTransform(mouseX,mouseY);
+            int simX = (int) simCoord.getX();
+            int simY = (int) simCoord.getY();
+            System.out.println(simX+","+simY);
+            this.simulation.setState(simX,simY,drawMode);
+            draw();
+
+        } catch (NonInvertibleTransformException e) {
+            System.out.println("InverseTransform failed!");
+        }
     }
 
     public void draw(){
