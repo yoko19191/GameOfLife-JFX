@@ -19,14 +19,14 @@ public class InfoBar extends HBox {
 
         this.cursor = new Label();
         this.editingTool = new Label();
-
+        /*
         Pane blanker = new Pane();                //a blank component
         blanker.setMinSize(0,0);
         blanker.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
         VBox.setVgrow(blanker, Priority.ALWAYS);  //pull infoBar down
+        */
 
-
-        this.getChildren().addAll(this.editingTool,blanker,this.cursor);
+        this.getChildren().addAll(this.editingTool,this.cursor);
     }
 
     public void setDrawMode(int drawMode){
