@@ -1,6 +1,8 @@
 package xyz.geekself;
 
+//Logic Core
 public class Simulation {
+    //Setup static value to avoid confuse
     public static int DEAD = 0;
     public static int ALIVE = 1;
 
@@ -24,7 +26,7 @@ public class Simulation {
 
         return copySimulation;
     }
-
+    /*
     public void printBoard(){
         System.out.println("---");
         for(int y=0; y<height; y++){
@@ -41,7 +43,7 @@ public class Simulation {
         }
         System.out.println("---\n");
     }
-
+    */
     public void setAlive(int x, int y){
         this.setState(x,y,ALIVE);
     }
@@ -114,6 +116,7 @@ public class Simulation {
     }
 
     public static void main(String[] args) {
+        /*
         Simulation simulation = new Simulation(8,5);
 
         simulation.setAlive(2,2);
@@ -128,6 +131,8 @@ public class Simulation {
         simulation.step();
 
         System.out.println(simulation.countAliveNeighbours(3,2));
+
+         */
     }
 
 

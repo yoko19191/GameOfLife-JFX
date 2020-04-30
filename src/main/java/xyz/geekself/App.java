@@ -15,8 +15,9 @@ public class App extends Application {
     public void start(Stage stage) {
 
         MainView mainView = new MainView();
-        Scene scene = new Scene(mainView, 640, 480);
+        Scene scene = new Scene(mainView, 400, 455);
         stage.setScene(scene);
+        stage.setTitle(" R.I.P  John Conway");
         stage.show();
         mainView.draw();
 

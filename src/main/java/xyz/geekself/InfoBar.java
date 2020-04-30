@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 public class InfoBar extends HBox {
 
     //Setup Display format
-    private static String drawModeFormat = "Draw Mode: %s     ";
+    private static String drawModeFormat = "DrawMode: %s     ";
     private static String cursorPosFormat = "Cursor: (%d,%d)";
 
     private Label cursor;
